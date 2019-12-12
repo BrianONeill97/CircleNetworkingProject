@@ -8,7 +8,7 @@ Game::Game()
 	//Creates my Player
 	m_circle = Dot(true);
 	m_enemy = Dot(false);
-
+	//m_enemyTwo = Dot(false);
 }
 
 
@@ -57,10 +57,12 @@ void Game::init(const char* title, int xPos, int yPos, int width, int height, bo
 	}
 
 	m_circle.Init(renderer);
-	m_circle.SetPosition(100, 300);
+	m_circle.SetPosition(100, 400);
 	
 
 	m_enemy.Init(renderer);
+
+	//m_enemyTwo.Init(renderer);
 
 	//myClient.SendCircle(m_circle);
 }
@@ -73,6 +75,8 @@ void Game::processEvents()
 	{
 		m_circle.handleEvent(event);
 		m_enemy.handleEvent(event);
+		//m_enemyTwo.handleEvent(event);
+
 	}
 }
 
@@ -80,23 +84,27 @@ void Game::processEvents()
 /// Update the game world
 void Game::update(Client myClient)
 {
-	//if (!m_circle.Checkcollision(m_enemy.GetCenterX(), m_enemy.GetCenterY()))
-	//{
+	if (!m_circle.Checkcollision(m_enemy.GetCenterX(), m_enemy.GetCenterY()))
+	{
 		myClient.SendCircle(m_circle);
-		if (!myClient.vec.empty())
+		if (myClient.vec.size() > 1)
 		{
 			m_enemy.SetPosition(myClient.vec.at(0), myClient.vec.at(1));
-			myClient.vec.clear();
 		}
+		//if (myClient.vec.size() > 3)
+		//{
+		//	m_enemyTwo.SetPosition(myClient.vec.at(2), myClient.vec.at(3));
+		//}
+
 		m_circle.aliveTime();
 		m_circle.move(500, 700);
 
 
- //	}
-	//else
-	//{
-	//	std::cout << m_circle.timeAlive << std::endl;
-	//}
+ 	}
+	else
+	{
+		std::cout << m_circle.timeAlive << std::endl;
+	}
 }
 
 /// draw the frame and then switch bufers
@@ -108,6 +116,7 @@ void Game::render()
 	//Draw here
 	m_circle.render(renderer);
 	m_enemy.render(renderer);
+	//m_enemyTwo.render(renderer);
 
 	//Presents the new Images
 	SDL_RenderPresent(renderer);

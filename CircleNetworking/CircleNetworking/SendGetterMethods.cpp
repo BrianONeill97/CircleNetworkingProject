@@ -137,7 +137,7 @@ bool Client::GetCircle(std::string& _string)
 			vec.clear();
 		}
 			vec.push_back(i);
-		std::cout << i << std::endl;
+		//std::cout << i << std::endl;
 	}
 	return true;//Return true if we were successful in retrieving the string
 }

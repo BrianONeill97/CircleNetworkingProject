@@ -24,6 +24,7 @@ public:
 
 	Dot m_circle;
 	Dot m_enemy;
+	Dot m_enemyTwo;
 
 private:
 	bool isRunning = false;

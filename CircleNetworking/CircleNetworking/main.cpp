@@ -16,7 +16,7 @@ using namespace std;
 using namespace std;
 int main(int argc, char* argv[])
 {
-	Client myClient("149.153.106.176", 1109); //Create client to localhost ("149.153.106.176") on port 1111
+	Client myClient("149.153.106.176", 1112); //Create client to localhost ("149.153.106.176") on port 1111
 
 
 	if (!myClient.Connect()) //If client fails to connect...
